@@ -39,12 +39,13 @@ function test() {
       {
         type: "input",
         name: "usage",
-        message: "Usage information?",
+        message:
+          "Instructions and examples for use. Include screenshots as needed.?",
       },
       {
         type: "input",
         name: "contribution",
-        message: "Contribution guidelines?",
+        message: "Who were your contributors?",
       },
       {
         type: "input",
@@ -69,40 +70,56 @@ function test() {
     ])
     .then((response) => {
       fs.writeFile(
-        "index.html",
-        `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-        <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-      <h2 class="display-4">Name</h2>
-      <p><!--name-->${response.name}</p>
-      <h2 class="lead">Description</h2>
-      <p><!--Description-->${response.description}</p>
-      <h2 class="lead">Installation</h2>
-      <p><!--Installation-->${response.installation}</p>
-      <h2 class="lead">Usage</h2>
-      <p><!--Usage-->${response.usage}</p>
-      <h2 class="lead">Contributing</h2>
-      <p><!--Contributing-->${response.contribution}</p>
-      <h2 class="lead">Test instructions</h2>
-      <p><!--Test instructions?-->${response.test}</p>
-      <h2 class="lead">License</h2>
-      <p><!--License-->${response.license}</p>
-      <h2 class="lead">Questions</h2>
-      <p><!--Questions-->${response.question}</p>
-      <h2 class="lead">Enter GitHub username URL</h2>
-      <p><!--Enter GitHub username URL-->${response.github}</p>
-    </div>
-  </div>
-</body>
-</html>
+        "README.md",
+        `# ${response.name}
+
+## Description
+
+Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
+
+${response.description}
+
+## Table of Contents (Optional)
+
+If your README is long, add a table of contents to make it easy for users to find what they need.
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Credits](#credits)
+- [License](#license)
+- [Contribution](#Contributions)
+- [Test](#Test)
+- [Intruction](#Intructions)
+
+
+## Installation
+
+${response.installation}
+
+## Usage
+
+${response.usage}
+    
+## Credits
+
+${response.contribution}
+
+## License
+
+${response.license}[https://choosealicense.com/](https://choosealicense.com/).
+
+---
+
+🏆 The previous sections are the bare minimum, and your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
+
+## Badges
+
+![badmath](https://img.shields.io/github/languages/top/lernantino/badmath)
+
+
+## Tests
+
+${response.test}
 
 `,
         (err) => (err ? console.error(err) : console.log("HTML file created"))
